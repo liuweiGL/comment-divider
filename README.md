@@ -10,10 +10,15 @@ A modern rewrite of [comment-divider](https://github.com/liuweiGL/comment-divide
 - **Main Header** — a block-style section separator with a title line between two solid lines.
 - **Sub Header** — a compact single-line section separator.
 - **Solid Line** — a plain full-width divider line.
+- **Multi-line support** — a title containing multiple lines (separated by newlines) is rendered
+  as one divider line per text line, so you can build multi-line headers or bullet lists.
+- **CJK alignment via `cjkWidthRatio`** — Chinese / full-width characters are measured by display
+  width (default 2 grid cells per char) so text lines always line up with the solid lines. If your
+  editor font renders CJK characters narrower, lower `comment-divider.cjkWidthRatio` (e.g. `1.5`)
+  to fix vertical misalignment in Chinese comments.
 
 Each divider adapts to the active language's comment syntax and supports custom line length,
-filling symbol, alignment, vertical style, and text transform. Full-width / CJK characters are
-measured by display width so text lines always line up with solid lines.
+filling symbol, alignment, vertical style, and text transform.
 
 ## Usage
 
