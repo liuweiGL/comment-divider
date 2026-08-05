@@ -1,0 +1,203 @@
+{
+  "name": "comment-divider",
+  "displayName": "Comment Divider",
+  "version": "0.0.1",
+  "description": "Divide your code by sections with styled separators.",
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "comment",
+    "divider",
+    "section",
+    "separator"
+  ],
+  "bugs": {
+    "url": "https://github.com/liuweiGL/comment-divider-vite/issues"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liuweiGL/comment-divider-vite"
+  },
+  "publisher": "liuweiGL",
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "vp build",
+    "build": "vp build",
+    "watch": "vp build --watch",
+    "dev": "vp build --watch",
+    "lint": "vp check",
+    "test": "vp test",
+    "test:watch": "vp test --watch",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.125.0",
+    "@vscode/vsce": "^3.9.2",
+    "typescript": "latest",
+    "vite-plus": "^0.2.8"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "comment-divider.makeSubHeader",
+        "title": "Comment Divider: Make Subheader"
+      },
+      {
+        "command": "comment-divider.makeMainHeader",
+        "title": "Comment Divider: Make Main Header"
+      },
+      {
+        "command": "comment-divider.insertSolidLine",
+        "title": "Comment Divider: Insert Solid Line"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "comment-divider.makeSubHeader",
+        "key": "alt+x",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "comment-divider.makeMainHeader",
+        "key": "shift+alt+x",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "comment-divider.insertSolidLine",
+        "key": "alt+y",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Comment Divider",
+      "properties": {
+        "comment-divider.length": {
+          "type": "number",
+          "default": 80,
+          "description": "Set line length for all dividers."
+        },
+        "comment-divider.shouldLengthIncludeIndent": {
+          "type": "boolean",
+          "default": false,
+          "description": "Set whether the divider will be shrink consider indent size, or will be always fixed length."
+        },
+        "comment-divider.cjkWidthRatio": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "description": "Set the width of CJK/full-width characters relative to one grid cell (e.g. 2 for standard monospace, lower if your font renders CJK narrower)."
+        },
+        "comment-divider.mainHeaderFiller": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1,
+          "default": "-",
+          "description": "Set symbol for main header line filling (only one)."
+        },
+        "comment-divider.mainHeaderHeight": {
+          "type": "string",
+          "enum": [
+            "block",
+            "line"
+          ],
+          "default": "block",
+          "description": "Set main header vertical style."
+        },
+        "comment-divider.mainHeaderAlign": {
+          "type": "string",
+          "enum": [
+            "center",
+            "left",
+            "right"
+          ],
+          "default": "center",
+          "description": "Set main header text align."
+        },
+        "comment-divider.mainHeaderTransform": {
+          "type": "string",
+          "enum": [
+            "uppercase",
+            "lowercase",
+            "titlecase",
+            "none"
+          ],
+          "default": "none",
+          "description": "Set main header text transform style."
+        },
+        "comment-divider.subheaderFiller": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1,
+          "default": "-",
+          "description": "Set symbol for subheader line filling (only one)."
+        },
+        "comment-divider.subheaderHeight": {
+          "type": "string",
+          "enum": [
+            "block",
+            "line"
+          ],
+          "default": "line",
+          "description": "Set subheader vertical style."
+        },
+        "comment-divider.subheaderAlign": {
+          "type": "string",
+          "enum": [
+            "center",
+            "left",
+            "right"
+          ],
+          "default": "center",
+          "description": "Set subheader text align."
+        },
+        "comment-divider.subheaderTransform": {
+          "type": "string",
+          "enum": [
+            "uppercase",
+            "lowercase",
+            "titlecase",
+            "none"
+          ],
+          "default": "none",
+          "description": "Set subheader text transform style."
+        },
+        "comment-divider.lineFiller": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1,
+          "default": "-",
+          "description": "Set symbol for solid line filling."
+        },
+        "comment-divider.languagesMap": {
+          "type": "object",
+          "uniqueItems": true,
+          "patternProperties": {
+            "^[\\w\\-\\.]+$": {
+              "type": "array",
+              "description": "Name of the language mode given by VSCode",
+              "minItems": 1,
+              "maxItems": 2,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "description": "Defines what characters will be used as comment line limiters for special languages. It also overrides the default preset."
+        }
+      }
+    }
+  },
+  "activationEvents": [],
+  "icon": "img/logo_256.png",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "packageManager": "pnpm@11.5.0"
+}
