@@ -8,7 +8,7 @@ const generateCommand = (type: PresetId) => () => {
     const editor = window.activeTextEditor;
     if (!editor) return;
 
-    insertDivider(type, getEditorContext(editor));
+    insertDivider(type, getEditorContext(editor, type));
   } catch (e) {
     showError(e);
   }

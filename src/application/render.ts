@@ -1,16 +1,32 @@
 import { BUILDERS_MAP, buildSolidLine } from "../core/build";
+import { NEW_LINE_SYM } from "../core/constants";
 import { checkCommentChars, checkFillerLen, checkLongText } from "../core/errors";
 import { TRANSFORM_MAP } from "../core/transform";
 import { IConfig, PresetId } from "../core/types";
 
-const extractIndent = (rawText: string): string => rawText.split(/\S+/)[0];
+const extractIndent = (rawText: string): string => {
+  const firstContentLine = rawText.split(NEW_LINE_SYM).find((line) => line.trim()) ?? rawText;
+  return firstContentLine.split(/\S+/)[0];
+};
 
 const renderHeader = (croppedText: string, config: IConfig, indent: string): string => {
-  checkCommentChars(croppedText, config.limiters);
-  checkLongText(croppedText, config.lineLen, config.limiters, config.cjkWidthRatio);
+  // Split into trimmed, non-empty text lines so a multi-line selection becomes
+  // multiple divider text lines (each centered independently).
+  const lines = croppedText
+    .split(NEW_LINE_SYM)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  for (const line of lines) {
+    checkCommentChars(line, config.limiters);
+    checkLongText(line, config.lineLen, config.limiters, config.cjkWidthRatio);
+  }
   checkFillerLen(config.sym);
 
-  const transformedWords = TRANSFORM_MAP[config.transform](croppedText);
+  const transformedWords = lines
+    .map((line) => TRANSFORM_MAP[config.transform](line))
+    .join(NEW_LINE_SYM);
+
   return BUILDERS_MAP[config.height](config, transformedWords, indent);
 };
 

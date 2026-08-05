@@ -15,7 +15,7 @@ export const buildSolidLine = (config: IConfig, leftIndent: string): string => {
   return leftIndent + charListToString(computedCharList);
 };
 
-export const buildWordsLine = (
+const buildSingleWordsLine = (
   config: IConfig,
   transformedWords: string,
   leftIndent: string,
@@ -32,6 +32,18 @@ export const buildWordsLine = (
   const computedCharList = composeInjectors(injectLimiters, injectWords)(blankCharList);
 
   return leftIndent + charListToString(computedCharList);
+};
+
+export const buildWordsLine = (
+  config: IConfig,
+  transformedWords: string,
+  leftIndent: string,
+): string => {
+  // Multi-line text is rendered as one divider line per text line.
+  return transformedWords
+    .split(NEW_LINE_SYM)
+    .map((line) => buildSingleWordsLine(config, line, leftIndent))
+    .join(NEW_LINE_SYM);
 };
 
 export const buildBlock = (

@@ -14,12 +14,12 @@
     "separator"
   ],
   "bugs": {
-    "url": "https://github.com/liuweiGL/comment-divider-vite/issues"
+    "url": "https://github.com/liuweiGL/comment-divider/issues"
   },
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/liuweiGL/comment-divider-vite"
+    "url": "https://github.com/liuweiGL/comment-divider"
   },
   "publisher": "liuweiGL",
   "main": "./dist/extension.js",
