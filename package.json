@@ -1,6 +1,6 @@
 {
-  "name": "comment-divider",
-  "displayName": "Comment Divider",
+  "name": "comment-divider-next",
+  "displayName": "Comment Divider Next",
   "version": "0.0.1",
   "description": "Divide your code by sections with styled separators.",
   "categories": [
